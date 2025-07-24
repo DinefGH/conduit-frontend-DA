@@ -4,7 +4,7 @@ FROM node:18 AS builder
 WORKDIR /app
 COPY . .
 RUN npm ci
-RUN npm run build --configuration production
+RUN npm run build -- --configuration production
 
 # Stage 2: Serve via nginx
 FROM nginx:alpine
