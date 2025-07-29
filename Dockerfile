@@ -1,14 +1,16 @@
 # Stage 1: Build Angular App
 FROM node:18 AS builder
 
-WORKDIR /app
+ARG WORKDIR=/app
+
+WORKDIR ${WORKDIR}
 
 # install dependencies first for better cache‑reuse
 COPY package.json package-lock.json ./
 RUN npm ci
 
 # copy the rest of your source and build
-COPY . .
+COPY . ${WORKDIR}
 RUN npm run build -- --configuration production
 
 
